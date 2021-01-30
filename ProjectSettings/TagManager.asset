@@ -9,6 +9,7 @@ TagManager:
   - LineOrigin
   - HookEye
   - Toy
+  - Rock
   layers:
   - Default
   - TransparentFX
