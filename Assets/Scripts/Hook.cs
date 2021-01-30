@@ -40,6 +40,23 @@ public class Hook : MonoBehaviour
             //play memory
 
         }
+
+        if (collision.gameObject.tag == "Rock")
+        {
+
+            StartCoroutine("SlowDown");
+
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Rock")
+        {
+
+            StartCoroutine("Descend");
+
+        }
     }
 
     private IEnumerator SlowDown()
