@@ -6,13 +6,14 @@ public class Hook : MonoBehaviour
 {
     public bool descending = false;
     public float descentSpeed = 0.01f;
-    
+    public float slowDownRate = 1f;
 
-    // Start is called before the first frame update
-    void Start()
+    public float actualDescentSpeed;
+
+
+    private void Start()
     {
-
-        
+        actualDescentSpeed = descentSpeed;
     }
 
     // Update is called once per frame
@@ -22,9 +23,44 @@ public class Hook : MonoBehaviour
 
         if (descending)
         {
-            newPosition.y -= descentSpeed * Time.deltaTime;
+            newPosition.y -= actualDescentSpeed * Time.deltaTime;
             transform.position = newPosition;
         }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Toy")
+        {
+            Toy toy = collision.gameObject.GetComponent<Toy>();
+            int memory = toy.collect();
+
+            //StartCoroutine("SlowDown");
+            //play memory
+
+        }
+    }
+
+    private IEnumerator SlowDown()
+    {
+        while (actualDescentSpeed > 0.01f)
+        {
+            actualDescentSpeed = Mathf.Lerp(actualDescentSpeed, 0f, slowDownRate * Time.deltaTime);
+            yield return null;
+        }
+        descending = false;
+
+    }
+
+    private IEnumerator Descend()
+    {
+        while (actualDescentSpeed < descentSpeed)
+        {
+            actualDescentSpeed = Mathf.Lerp(actualDescentSpeed, descentSpeed, slowDownRate * Time.deltaTime);
+            yield return null;
+        }
+        descending = true;
 
     }
 
