@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - hook
+  - Hook
+  - LineOrigin
+  - HookEye
+  - Toy
   layers:
   - Default
   - TransparentFX
@@ -14,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - MovementBoundary
+  - Hook
   - 
   - 
   - 
