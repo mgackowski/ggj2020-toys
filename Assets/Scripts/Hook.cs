@@ -10,10 +10,13 @@ public class Hook : MonoBehaviour
 
     public float actualDescentSpeed;
 
+    private Rigidbody hookRigidbody;
+
 
     private void Start()
     {
         actualDescentSpeed = descentSpeed;
+        hookRigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -38,6 +41,25 @@ public class Hook : MonoBehaviour
 
             //StartCoroutine("SlowDown");
             //play memory
+
+        }
+
+        if (collision.gameObject.tag == "Rock")
+        {
+
+            descending = false;
+            hookRigidbody.AddForce(Vector3.up);
+            StartCoroutine("SlowDown");
+
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Rock")
+        {
+
+            //StartCoroutine("Descend");
 
         }
     }
