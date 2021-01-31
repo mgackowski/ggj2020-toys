@@ -8,10 +8,12 @@ public class Hook : MonoBehaviour
     public float descentSpeed = 0.01f;
     public float slowDownRate = 1f;
     public float liftSpeedMod = 0.5f;
+    public AudioHandler audioHandler;
 
     public float actualDescentSpeed;
 
     private Rigidbody hookRigidbody;
+    private AudioSource audioSource;
     private bool hitRockOnce = false;
 
 
@@ -19,6 +21,7 @@ public class Hook : MonoBehaviour
     {
         actualDescentSpeed = descentSpeed;
         hookRigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,8 +57,9 @@ public class Hook : MonoBehaviour
         if (collision.gameObject.tag == "Rock")
         {
             descending = false;
+            if(!audioSource.isPlaying) audioSource.Play();
 
-            if(!hitRockOnce)
+            if (!hitRockOnce)
             {
                 UIHandler.FadeOutBottomText("Press Ctrl to reel in",5f);
                 hitRockOnce = true;

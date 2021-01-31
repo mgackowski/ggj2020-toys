@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameLogic : MonoBehaviour
 {
     public CameraController cameraController;
+    public AudioHandler audioHandler;
     public Hook hook;
     public GameState state = GameState.TitleScreen;
 
@@ -19,7 +20,8 @@ public class GameLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioHandler.playSound("AtSeaLevel1", AudioHandler.SoundSource.Environment, true, false);
+        audioHandler.playSound("Sea Song", AudioHandler.SoundSource.Music, true, false);
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class GameLogic : MonoBehaviour
         {
             StartGame();
         }
+
         
     }
 
@@ -38,6 +41,9 @@ public class GameLogic : MonoBehaviour
         hook.GetComponent<Hook>().descending = true;
         UIHandler.ChangeBottomText("");
         state = GameState.Playing;
+
+        audioHandler.playSound("Reel2Water",AudioHandler.SoundSource.Reel, true, false);
+        //audioHandler.playSound("Reel2Loop", AudioHandler.SoundSource.Reel, true, true);
 
     }
 }
