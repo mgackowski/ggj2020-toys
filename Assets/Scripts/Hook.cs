@@ -70,7 +70,7 @@ public class Hook : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "EndTrigger")
+        if (other.gameObject.tag == "TriggerEnd")
         {
             descending = false;
             StartCoroutine("SlowDown");

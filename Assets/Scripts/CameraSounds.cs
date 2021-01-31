@@ -22,6 +22,7 @@ public class CameraSounds : MonoBehaviour
     {
         if (other.gameObject.tag == "TriggerUnderwater")
         {
+            Debug.Log("Underwater");
             audioHandler.playSound("UnderwaterLoop", AudioHandler.SoundSource.Environment, true, false);
             audioHandler.playSound("Reel2Loop", AudioHandler.SoundSource.Reel, true, false);
         }
