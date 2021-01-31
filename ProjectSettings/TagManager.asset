@@ -16,6 +16,8 @@ TagManager:
   - TriggerSilence
   - TriggerEnd
   - BottomText
+  - Logo
+  - MemoryImage
   layers:
   - Default
   - TransparentFX

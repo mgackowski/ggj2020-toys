@@ -9,6 +9,7 @@ public class Hook : MonoBehaviour
     public float slowDownRate = 1f;
     public float liftSpeedMod = 0.5f;
     public AudioHandler audioHandler;
+    public GameLogic logic;
 
     public float actualDescentSpeed;
 
@@ -49,6 +50,8 @@ public class Hook : MonoBehaviour
             Toy toy = collision.gameObject.GetComponent<Toy>();
             int memory = toy.collect();
 
+            UIHandler.displayMemory(memory);
+
             //StartCoroutine("SlowDown");
             //play memory
 
@@ -74,6 +77,9 @@ public class Hook : MonoBehaviour
         {
             descending = false;
             StartCoroutine("SlowDown");
+
+            audioHandler.playSound("SoulRisingUp", AudioHandler.SoundSource.Environment, true, false);
+            logic.state = GameLogic.GameState.Ending;
         }
     }
 

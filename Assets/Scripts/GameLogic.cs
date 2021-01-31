@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameLogic : MonoBehaviour
     public AudioHandler audioHandler;
     public Hook hook;
     public GameState state = GameState.TitleScreen;
+    public Image whiteFade;
 
     public enum GameState
     {
@@ -32,6 +34,23 @@ public class GameLogic : MonoBehaviour
             StartGame();
         }
 
+        if (Time.timeScale == 0f && Input.GetButtonDown("Fire1"))
+        {
+            Time.timeScale = 1f;
+            GameObject[] memories = GameObject.FindGameObjectsWithTag("MemoryImage");
+            foreach (GameObject gameObject in memories)
+            {
+                gameObject.GetComponent<Image>().enabled = false;
+            }
+            audioHandler.unpauseSounds();
+
+        } 
+
+        if(state == GameState.Ending)
+        {
+            UIHandler.fadeIn(whiteFade);
+        }
+
         
     }
 
@@ -40,6 +59,7 @@ public class GameLogic : MonoBehaviour
         cameraController.StartGame();
         hook.GetComponent<Hook>().descending = true;
         UIHandler.ChangeBottomText("");
+        UIHandler.disableLogo();
         state = GameState.Playing;
 
         audioHandler.playSound("Reel2Water",AudioHandler.SoundSource.Reel, true, false);

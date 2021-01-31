@@ -7,6 +7,9 @@ public class UIHandler : MonoBehaviour
 {
     public static UIHandler instance;
     public static Text bottomText;
+    public static Image logo;
+    public static Image memory;
+
 
     private void Awake()
     {
@@ -16,6 +19,8 @@ public class UIHandler : MonoBehaviour
     void Start()
     {
         bottomText = GameObject.FindGameObjectWithTag("BottomText").GetComponent<Text>();
+        logo = GameObject.FindGameObjectWithTag("Logo").GetComponent<Image>();
+        memory = GameObject.FindGameObjectWithTag("Logo").GetComponent<Image>();
     }
 
     public static void ChangeBottomText(string newText)
@@ -43,10 +48,45 @@ public class UIHandler : MonoBehaviour
         text.color = original;
     }
 
+    public static void disableLogo()
+    {
+        logo.enabled = false;
+    }
+
+    public static void displayMemory(int number)
+    {
+        //memory.enabled = true;
+        //Sprite sprite = memory.gameObject.GetComponent<Memory>().memories[number];
+        //memory.sprite = sprite;
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public static void fadeIn(Image img)
+    {
+        instance.StartCoroutine(FadeIn(img));
+    }
+
+    public static IEnumerator FadeIn(Image img)
+    {
+        img.enabled = true;
+        //Color original = img.color;
+        //Color transition = img.color;
+        //transition.a = 0f;
+
+        for (float alpha = 0f; alpha <= 1f; alpha += (Time.deltaTime / 5f))
+        {
+            Color imgColor = img.color;
+            imgColor.a = alpha;
+            img.color = imgColor;
+            yield return null;
+        }
+        //text.color = original;
     }
 
 
