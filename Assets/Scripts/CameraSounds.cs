@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraSounds : MonoBehaviour
 {
     public AudioHandler audioHandler;
+    public Light finalLight;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class CameraSounds : MonoBehaviour
         if (other.gameObject.tag == "TriggerHospitalClean")
         {
             audioHandler.playSound("Hos1Clean", AudioHandler.SoundSource.Environment, true, false);
+            finalLight.GetComponent<VaryIntensity>().enabled = true;
         }
         if (other.gameObject.tag == "TriggerHospitalDirty")
         {
