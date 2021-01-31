@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c648437bcedf4996b1ec39a014923ea
+guid: dae99d290be2ab04ebbeacec13533797
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Stadium 1956
+  fontName: IM FELL DW Pica PRO
   fontNames:
-  - Stadium 1956
+  - IM FELL DW Pica PRO
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
