@@ -38,7 +38,7 @@ public class AudioHandler : MonoBehaviour
         Reel
     }
 
-    void Start()
+    void Awake()
     {
         sourceList = new Dictionary<SoundSource, AudioSource>() {
             { SoundSource.Music, music },
