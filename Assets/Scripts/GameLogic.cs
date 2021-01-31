@@ -6,7 +6,15 @@ public class GameLogic : MonoBehaviour
 {
     public CameraController cameraController;
     public Hook hook;
+    public GameState state = GameState.TitleScreen;
 
+    public enum GameState
+    {
+        TitleScreen,
+        Playing,
+        Memory,
+        Ending
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +25,10 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(state == GameState.TitleScreen && Input.anyKeyDown)
+        {
+            StartGame();
+        }
         
     }
 
@@ -24,6 +36,8 @@ public class GameLogic : MonoBehaviour
     {
         cameraController.StartGame();
         hook.GetComponent<Hook>().descending = true;
+        UIHandler.ChangeBottomText("");
+        state = GameState.Playing;
 
     }
 }
