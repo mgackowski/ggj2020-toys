@@ -1037,6 +1037,11 @@ PrefabInstance:
       propertyPath: forceTouchPointOffset
       value: -0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 5525972433324082029, guid: cbfbbd1b626244244a717787d0d43c5e,
+        type: 3}
+      propertyPath: forceModifier
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5525972433324082030, guid: cbfbbd1b626244244a717787d0d43c5e,
         type: 3}
       propertyPath: m_LocalPosition.x
