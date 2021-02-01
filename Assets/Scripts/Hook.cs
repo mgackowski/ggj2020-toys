@@ -7,16 +7,22 @@ public class Hook : MonoBehaviour
     public bool descending = false;
     public float descentSpeed = 0.01f;
     public float slowDownRate = 1f;
+    public float liftSpeedMod = 0.5f;
+    public AudioHandler audioHandler;
+    public GameLogic logic;
 
     public float actualDescentSpeed;
 
     private Rigidbody hookRigidbody;
+    private AudioSource audioSource;
+    private bool hitRockOnce = false;
 
 
     private void Start()
     {
         actualDescentSpeed = descentSpeed;
         hookRigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,7 +30,12 @@ public class Hook : MonoBehaviour
     {
         Vector3 newPosition = transform.position;
 
-        if (descending)
+        if(Input.GetButton("Fire1"))
+        {
+            newPosition.y += actualDescentSpeed * Time.deltaTime * liftSpeedMod;
+            transform.position = newPosition;
+        }
+        else if (descending)
         {
             newPosition.y -= actualDescentSpeed * Time.deltaTime;
             transform.position = newPosition;
@@ -39,6 +50,8 @@ public class Hook : MonoBehaviour
             Toy toy = collision.gameObject.GetComponent<Toy>();
             int memory = toy.collect();
 
+            UIHandler.displayMemory(memory);
+
             //StartCoroutine("SlowDown");
             //play memory
 
@@ -46,11 +59,27 @@ public class Hook : MonoBehaviour
 
         if (collision.gameObject.tag == "Rock")
         {
-
             descending = false;
-            hookRigidbody.AddForce(Vector3.up);
+            if(!audioSource.isPlaying) audioSource.Play();
+
+            if (!hitRockOnce)
+            {
+                UIHandler.FadeOutBottomText("Press Ctrl to reel in",5f);
+                hitRockOnce = true;
+            }
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "TriggerEnd")
+        {
+            descending = false;
             StartCoroutine("SlowDown");
 
+            audioHandler.playSound("SoulRisingUp", AudioHandler.SoundSource.Environment, true, false);
+            logic.state = GameLogic.GameState.Ending;
         }
     }
 
@@ -58,9 +87,7 @@ public class Hook : MonoBehaviour
     {
         if (collision.gameObject.tag == "Rock")
         {
-
-            //StartCoroutine("Descend");
-
+            descending = true;
         }
     }
 

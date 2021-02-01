@@ -10,6 +10,14 @@ TagManager:
   - HookEye
   - Toy
   - Rock
+  - TriggerUnderwater
+  - TriggerHospitalClean
+  - TriggerHospitalDirty
+  - TriggerSilence
+  - TriggerEnd
+  - BottomText
+  - Logo
+  - MemoryImage
   layers:
   - Default
   - TransparentFX
